@@ -1,0 +1,25 @@
+{
+  "@@locale": "en",
+
+  "appName": "Document Scanner",
+  "selectLanguage": "Select Language",
+  "selectLanguageSubtitle": "Choose your preferred language",
+  "english": "English",
+  "turkish": "Türkçe",
+  "continueButton": "Continue",
+
+  "scanDocuments": "Scan Documents",
+  "scanDescription": "Scan documents and turn them into clean digital files.",
+  "scanDocument": "Scan Document",
+  "importFromPhotos": "Import from Photos",
+  "emptyDocuments": "Your scanned documents will appear here.",
+
+  "settings": "Settings",
+  "language": "Language",
+  "documents": "Documents",
+  "recentScans": "Recent Scans",
+  "reviewScan": "Review Scan",
+  "page": "Page",
+  "deletePage": "Delete Page",
+  "saveDocument": "Save Document"
+}

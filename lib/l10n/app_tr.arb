@@ -1,0 +1,25 @@
+{
+  "@@locale": "tr",
+
+  "appName": "Belge Tarayıcı",
+  "selectLanguage": "Dil Seçin",
+  "selectLanguageSubtitle": "Tercih ettiğiniz dili seçin",
+  "english": "English",
+  "turkish": "Türkçe",
+  "continueButton": "Devam Et",
+
+  "scanDocuments": "Belgeleri Tara",
+  "scanDescription": "Belgeleri tarayın ve temiz dijital dosyalara dönüştürün.",
+  "scanDocument": "Belge Tara",
+  "importFromPhotos": "Galeriden Al",
+  "emptyDocuments": "Taranan belgeleriniz burada görünecek.",
+
+  "settings": "Ayarlar",
+  "language": "Dil",
+  "documents": "Belgeler",
+  "recentScans": "Son Taramalar",
+  "reviewScan": "Taramayı İncele",
+  "page": "Sayfa",
+  "deletePage": "Sayfayı Sil",
+  "saveDocument": "Belgeyi Kaydet"
+}
