@@ -64,4 +64,93 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get saveDocument => 'Belgeyi Kaydet';
+
+  @override
+  String get documentName => 'Belge Adı';
+
+  @override
+  String get documentNameHint => 'Belge adını girin';
+
+  @override
+  String get cancel => 'İptal';
+
+  @override
+  String get save => 'Kaydet';
+
+  @override
+  String get documentSaved => 'Belge başarıyla kaydedildi';
+
+  @override
+  String get saveFailed => 'Belge kaydedilemedi';
+
+  @override
+  String pageCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sayfa',
+      one: '1 sayfa',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noDocuments => 'Henüz kaydedilmiş belge yok';
+
+  @override
+  String get renameDocument => 'Belgeyi Yeniden Adlandır';
+
+  @override
+  String get deleteDocument => 'Belgeyi Sil';
+
+  @override
+  String get newDocumentName => 'Yeni belge adı';
+
+  @override
+  String get deleteDocumentTitle => 'Belge Silinsin mi?';
+
+  @override
+  String get deleteDocumentMessage => 'Bu belge ve tüm sayfaları kalıcı olarak silinecek.';
+
+  @override
+  String get delete => 'Sil';
+
+  @override
+  String get rename => 'Yeniden Adlandır';
+
+  @override
+  String get saveAsPdf => 'PDF Olarak Kaydet';
+
+  @override
+  String get creatingPdf => 'PDF oluşturuluyor...';
+
+  @override
+  String get pdfCreated => 'PDF başarıyla oluşturuldu';
+
+  @override
+  String get pdfCreateFailed => 'PDF oluşturulamadı';
+
+  @override
+  String get exportDocument => 'Belgeyi Dışa Aktar';
+
+  @override
+  String get chooseExportFormat => 'Dışa Aktarma Formatını Seçin';
+
+  @override
+  String get pdfFormat => 'PDF';
+
+  @override
+  String get pdfFormatDescription => 'Tüm sayfaları tek bir PDF dosyasında birleştir';
+
+  @override
+  String get jpegFormat => 'JPEG';
+
+  @override
+  String get jpegFormatDescription => 'Sayfaları JPEG görselleri olarak dışa aktar';
+
+  @override
+  String get pngFormat => 'PNG';
+
+  @override
+  String get pngFormatDescription => 'Sayfaları PNG görselleri olarak dışa aktar';
 }

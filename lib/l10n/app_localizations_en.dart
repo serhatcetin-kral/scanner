@@ -64,4 +64,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveDocument => 'Save Document';
+
+  @override
+  String get documentName => 'Document Name';
+
+  @override
+  String get documentNameHint => 'Enter document name';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get documentSaved => 'Document saved successfully';
+
+  @override
+  String get saveFailed => 'Could not save document';
+
+  @override
+  String pageCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pages',
+      one: '1 page',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noDocuments => 'No saved documents yet';
+
+  @override
+  String get renameDocument => 'Rename Document';
+
+  @override
+  String get deleteDocument => 'Delete Document';
+
+  @override
+  String get newDocumentName => 'New document name';
+
+  @override
+  String get deleteDocumentTitle => 'Delete Document?';
+
+  @override
+  String get deleteDocumentMessage => 'This document and all of its pages will be permanently deleted.';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get rename => 'Rename';
+
+  @override
+  String get saveAsPdf => 'Save as PDF';
+
+  @override
+  String get creatingPdf => 'Creating PDF...';
+
+  @override
+  String get pdfCreated => 'PDF created successfully';
+
+  @override
+  String get pdfCreateFailed => 'Could not create PDF';
+
+  @override
+  String get exportDocument => 'Export Document';
+
+  @override
+  String get chooseExportFormat => 'Choose Export Format';
+
+  @override
+  String get pdfFormat => 'PDF';
+
+  @override
+  String get pdfFormatDescription => 'Combine all pages into one PDF file';
+
+  @override
+  String get jpegFormat => 'JPEG';
+
+  @override
+  String get jpegFormatDescription => 'Export pages as JPEG images';
+
+  @override
+  String get pngFormat => 'PNG';
+
+  @override
+  String get pngFormatDescription => 'Export pages as PNG images';
 }

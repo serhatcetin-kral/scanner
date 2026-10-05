@@ -208,6 +208,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save Document'**
   String get saveDocument;
+
+  /// No description provided for @documentName.
+  ///
+  /// In en, this message translates to:
+  /// **'Document Name'**
+  String get documentName;
+
+  /// No description provided for @documentNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter document name'**
+  String get documentNameHint;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @documentSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Document saved successfully'**
+  String get documentSaved;
+
+  /// No description provided for @saveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save document'**
+  String get saveFailed;
+
+  /// No description provided for @pageCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 page} other{{count} pages}}'**
+  String pageCount(num count);
+
+  /// No description provided for @noDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved documents yet'**
+  String get noDocuments;
+
+  /// No description provided for @renameDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename Document'**
+  String get renameDocument;
+
+  /// No description provided for @deleteDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Document'**
+  String get deleteDocument;
+
+  /// No description provided for @newDocumentName.
+  ///
+  /// In en, this message translates to:
+  /// **'New document name'**
+  String get newDocumentName;
+
+  /// No description provided for @deleteDocumentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Document?'**
+  String get deleteDocumentTitle;
+
+  /// No description provided for @deleteDocumentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This document and all of its pages will be permanently deleted.'**
+  String get deleteDocumentMessage;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @rename.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get rename;
+
+  /// No description provided for @saveAsPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Save as PDF'**
+  String get saveAsPdf;
+
+  /// No description provided for @creatingPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating PDF...'**
+  String get creatingPdf;
+
+  /// No description provided for @pdfCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF created successfully'**
+  String get pdfCreated;
+
+  /// No description provided for @pdfCreateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create PDF'**
+  String get pdfCreateFailed;
+
+  /// No description provided for @exportDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Document'**
+  String get exportDocument;
+
+  /// No description provided for @chooseExportFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Export Format'**
+  String get chooseExportFormat;
+
+  /// No description provided for @pdfFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF'**
+  String get pdfFormat;
+
+  /// No description provided for @pdfFormatDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Combine all pages into one PDF file'**
+  String get pdfFormatDescription;
+
+  /// No description provided for @jpegFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'JPEG'**
+  String get jpegFormat;
+
+  /// No description provided for @jpegFormatDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Export pages as JPEG images'**
+  String get jpegFormatDescription;
+
+  /// No description provided for @pngFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'PNG'**
+  String get pngFormat;
+
+  /// No description provided for @pngFormatDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Export pages as PNG images'**
+  String get pngFormatDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
