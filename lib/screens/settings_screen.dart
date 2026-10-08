@@ -6,7 +6,7 @@ import 'package:upgrader/upgrader.dart';
 import '../l10n/app_localizations.dart';
 import '../services/app_prompt_service.dart';
 import 'how_to_use_screen.dart';
-
+import '../widgets/banner_ad_widget.dart';
 class SettingsScreen extends StatelessWidget {
   final Locale currentLocale;
   final Future<void> Function(Locale locale)
@@ -138,6 +138,12 @@ class SettingsScreen extends StatelessWidget {
         Theme.of(context).colorScheme;
 
     return Scaffold(
+      // Google AdMob banner at bottom of Settings
+      bottomNavigationBar: const SafeArea(
+        top: false,
+        child: BannerAdWidget(),
+      ),
+
       appBar: AppBar(
         title: Text(
           l10n.settings,

@@ -71,5 +71,8 @@
 
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Document Scanner needs photo access to import documents from your photo library.</string>
+    <!-- Google AdMob App ID -->
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-6282915034498194~6929020716</string>
 </dict>
 </plist>

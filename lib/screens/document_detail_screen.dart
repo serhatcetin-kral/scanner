@@ -9,6 +9,7 @@ import '../services/document_storage_service.dart';
 import '../services/image_export_service.dart';
 import '../services/pdf_service.dart';
 import 'edit_document_pages_screen.dart';
+import '../widgets/banner_ad_widget.dart';
 class DocumentDetailScreen extends StatefulWidget {
   final ScannedDocument document;
 
@@ -761,7 +762,16 @@ class _DocumentDetailScreenState
               ),
             ),
           ),
+// ==========================================
+// ADMOB BANNER — ABOVE EXPORT BUTTON
+// ==========================================
+          const SafeArea(
+            top: false,
+            bottom: false,
+            child: BannerAdWidget(),
+          ),
 
+          const SizedBox(height: 12),
           Padding(
             padding:
             const EdgeInsets

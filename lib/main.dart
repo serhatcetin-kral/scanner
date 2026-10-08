@@ -19,10 +19,12 @@ import 'services/document_storage_service.dart';
 import 'services/app_prompt_service.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:flutter/services.dart';
-
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'widgets/banner_ad_widget.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await MobileAds.instance.initialize();
 
   // 📱 Keep the app in portrait mode only
   await SystemChrome.setPreferredOrientations([
@@ -758,26 +760,21 @@ class _ScannerHomeScreenState
   // DATE
   // ============================================================
 
-  String _formatDate(
-      DateTime date,
-      ) {
-    final month =
-    date.month
-        .toString()
-        .padLeft(
-      2,
-      '0',
-    );
+  String _formatDate(DateTime date) {
+    final localDate = date.toLocal();
 
-    final day =
-    date.day
-        .toString()
-        .padLeft(
-      2,
-      '0',
-    );
+    final month = localDate.month.toString().padLeft(2, '0');
+    final day = localDate.day.toString().padLeft(2, '0');
 
-    return '${date.year}-$month-$day';
+    final hour = localDate.hour % 12 == 0
+        ? 12
+        : localDate.hour % 12;
+
+    final minute = localDate.minute.toString().padLeft(2, '0');
+
+    final period = localDate.hour >= 12 ? 'PM' : 'AM';
+
+    return '${localDate.year}-$month-$day  $hour:$minute $period';
   }
 
   // ============================================================
@@ -1295,6 +1292,11 @@ class _ScannerHomeScreenState
     )!;
 
     return Scaffold(
+      bottomNavigationBar: const SafeArea(
+        top: false,
+        child: BannerAdWidget(),
+      ),
+
       appBar: AppBar(
         title: Text(
           l10n.appName,

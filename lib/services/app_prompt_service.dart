@@ -109,8 +109,7 @@ class AppPromptService {
   // SHARE PROMPT
   // ============================================================
 
-  static Future<bool>
-  shouldShowSharePrompt() async {
+  static Future<bool> shouldShowSharePrompt() async {
     final prefs =
     await SharedPreferences.getInstance();
 
@@ -120,25 +119,54 @@ class AppPromptService {
     final alreadyShared =
         prefs.getBool(_sharedKey) ?? false;
 
-    // User already chose Share App.
-    // Never automatically ask again.
+    final lastSharePromptLaunch =
+        prefs.getInt('last_share_prompt_launch') ?? 0;
+
     if (alreadyShared) {
       return false;
     }
 
-    // Only show automatically on
-    // launch 5, 10 or 15.
-    return launchCount == 5 ||
-        launchCount == 10 ||
-        launchCount == 15;
+    // Maximum three Share prompt opportunities.
+    if (lastSharePromptLaunch >= 15) {
+      return false;
+    }
+
+    // Eligible starting at launch 5,
+    // then 10 and 15.
+    if (lastSharePromptLaunch < 5) {
+      return launchCount >= 5;
+    }
+
+    if (lastSharePromptLaunch < 10) {
+      return launchCount >= 10;
+    }
+
+    return launchCount >= 15;
   }
 
-  static Future<void>
-  markSharePromptShown() async {
-    // Nothing needs to be stored here.
-    //
-    // Share prompts are controlled by
-    // launch numbers 5, 10 and 15.
+  static Future<void> markSharePromptShown() async {
+    final prefs =
+    await SharedPreferences.getInstance();
+
+
+
+    final lastSharePromptLaunch =
+        prefs.getInt('last_share_prompt_launch') ?? 0;
+
+    final int milestone;
+
+    if (lastSharePromptLaunch < 5) {
+      milestone = 5;
+    } else if (lastSharePromptLaunch < 10) {
+      milestone = 10;
+    } else {
+      milestone = 15;
+    }
+
+    await prefs.setInt(
+      'last_share_prompt_launch',
+      milestone,
+    );
   }
 
   static Future<void> markAsShared() async {
