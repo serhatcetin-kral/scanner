@@ -19,12 +19,13 @@ import 'services/document_storage_service.dart';
 import 'services/app_prompt_service.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'widgets/banner_ad_widget.dart';
+import 'services/ad_consent_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await MobileAds.instance.initialize();
+  await AdConsentService.initialize();
 
   // 📱 Keep the app in portrait mode only
   await SystemChrome.setPreferredOrientations([
@@ -955,13 +956,56 @@ class _ScannerHomeScreenState
     if (_documents.isEmpty) {
       return Expanded(
         child: Center(
-          child: Text(
-            l10n.noDocuments,
-            textAlign:
-            TextAlign.center,
-            style: TextStyle(
-              color:
-              Colors.grey.shade500,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 88,
+                  height: 88,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer,
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  child: Icon(
+                    Icons.description_outlined,
+                    size: 44,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary,
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                Text(
+                  l10n.noDocuments,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                Text(
+                  'Scan your first document or import photos '
+                      'to get started.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    height: 1.5,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -1343,7 +1387,7 @@ class _ScannerHomeScreenState
           child: Column(
             children: [
               const SizedBox(
-                height: 20,
+                height: 8,
               ),
 
               // ==================================================
@@ -1391,8 +1435,12 @@ class _ScannerHomeScreenState
                 height: 56,
                 child:
                 FilledButton.icon(
-                  onPressed:
-                  _scanDocument,
+                  onPressed: _scanDocument,
+                  style: FilledButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
                   icon:
                   const Icon(
                     Icons
@@ -1426,6 +1474,11 @@ class _ScannerHomeScreenState
                 OutlinedButton.icon(
                   onPressed:
                   _importFromPhotos,
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
                   icon:
                   const Icon(
                     Icons

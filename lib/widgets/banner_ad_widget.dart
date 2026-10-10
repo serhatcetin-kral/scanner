@@ -1,9 +1,8 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+import '../services/ad_consent_service.dart';
 class BannerAdWidget extends StatefulWidget {
   const BannerAdWidget({super.key});
 
@@ -18,14 +17,45 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   @override
   void initState() {
     super.initState();
-    _loadBanner();
+
+    AdConsentService.consentChanges.addListener(
+      _onConsentChanged,
+    );
+
+    _checkConsentAndLoadBanner();
+  }
+  Future<void> _onConsentChanged() async {
+    final oldBanner = _bannerAd;
+
+    setState(() {
+      _bannerAd = null;
+      _isLoaded = false;
+    });
+
+    await oldBanner?.dispose();
+
+    if (!mounted) return;
+
+    await _checkConsentAndLoadBanner();
   }
 
-  void _loadBanner() {
+  Future<void> _checkConsentAndLoadBanner() async {
     if (!Platform.isIOS && !Platform.isAndroid) {
       return;
     }
 
+    // Check whether Google UMP allows ad requests.
+    final canRequestAds =
+    await ConsentInformation.instance.canRequestAds();
+
+    if (!mounted || !canRequestAds) {
+      return;
+    }
+
+    _loadBanner();
+  }
+
+  void _loadBanner() {
     // Official Google test banner IDs.
     final adUnitId = Platform.isAndroid
         ? 'ca-app-pub-3940256099942544/6300978111'
@@ -66,6 +96,10 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
 
   @override
   void dispose() {
+    AdConsentService.consentChanges.removeListener(
+      _onConsentChanged,
+    );
+
     _bannerAd?.dispose();
     super.dispose();
   }

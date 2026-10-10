@@ -7,6 +7,8 @@ import '../l10n/app_localizations.dart';
 import '../services/app_prompt_service.dart';
 import 'how_to_use_screen.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../services/ad_consent_service.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 class SettingsScreen extends StatelessWidget {
   final Locale currentLocale;
   final Future<void> Function(Locale locale)
@@ -370,7 +372,45 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           ),
+          FutureBuilder<PrivacyOptionsRequirementStatus>(
+            future: ConsentInformation.instance
+                .getPrivacyOptionsRequirementStatus(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData ||
+                  snapshot.data != PrivacyOptionsRequirementStatus.required) {
+                return const SizedBox.shrink();
+              }
 
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 28),
+                  const _SectionTitle(title: 'Privacy'),
+                  const SizedBox(height: 10),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: ListTile(
+                      leading: _SettingsIcon(
+                        icon: Icons.privacy_tip_outlined,
+                        colorScheme: colorScheme,
+                      ),
+                      title: const Text(
+                        'Privacy Options',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      subtitle: const Text(
+                        'Manage your advertising privacy choices',
+                      ),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () async {
+                        await AdConsentService.showPrivacyOptions();
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
           const SizedBox(height: 24),
 
           // ====================================================
