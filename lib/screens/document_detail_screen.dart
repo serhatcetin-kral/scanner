@@ -13,6 +13,7 @@ import '../widgets/banner_ad_widget.dart';
 
 import '../services/ocr_service.dart';
 import 'recognized_text_screen.dart';
+import '../services/searchable_pdf_service.dart';
 
 class DocumentDetailScreen extends StatefulWidget {
   final ScannedDocument document;
@@ -40,6 +41,56 @@ class _DocumentDetailScreenState
     _document = widget.document;
   }
 
+  Future<void> _saveAsSearchablePdf() async {
+    if (_exporting) return;
+
+    setState(() {
+      _exporting = true;
+    });
+
+    try {
+      final pdfFile =
+      await SearchablePdfService.createSearchablePdf(
+        _document,
+      );
+
+      if (!mounted) return;
+
+      final box = context.findRenderObject() as RenderBox?;
+
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [
+            XFile(
+              pdfFile.path,
+              mimeType: 'application/pdf',
+            ),
+          ],
+          title: _document.name,
+          subject: _document.name,
+          sharePositionOrigin: box == null
+              ? null
+              : box.localToGlobal(Offset.zero) & box.size,
+        ),
+      );
+    } catch (e) {
+      debugPrint('Searchable PDF export error: $e');
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Could not create searchable PDF.'),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _exporting = false;
+        });
+      }
+    }
+  }
   // ============================================================
   // EXPORT FORMAT SELECTION
   // ============================================================
@@ -111,6 +162,26 @@ class _DocumentDetailScreenState
                     );
                   },
                 ),
+// SEARCHABLE PDF
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const CircleAvatar(
+                    child: Icon(Icons.manage_search_outlined),
+                  ),
+                  title: const Text('Searchable PDF'),
+                  subtitle: const Text(
+                    'Original scanned pages with searchable text',
+                  ),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.pop(
+                      sheetContext,
+                      'searchablePdf',
+                    );
+                  },
+                ),
+
+
 
                 // JPEG
                 ListTile(
@@ -183,7 +254,9 @@ class _DocumentDetailScreenState
       case 'pdf':
         await _saveAsPdf();
         break;
-
+      case 'searchablePdf':
+        await _saveAsSearchablePdf();
+        break;
       case 'jpeg':
         await _exportImages(
           ImageExportFormat.jpeg,
@@ -597,6 +670,7 @@ class _DocumentDetailScreenState
         MaterialPageRoute(
           builder: (_) => RecognizedTextScreen(
             recognizedText: text,
+            imagePaths: List<String>.from(_document.pagePaths),
           ),
         ),
       );

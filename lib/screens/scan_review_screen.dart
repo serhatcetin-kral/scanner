@@ -676,6 +676,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
         MaterialPageRoute(
           builder: (_) => RecognizedTextScreen(
             recognizedText: text,
+            imagePaths: List<String>.from(_imagePaths),
           ),
         ),
       );
