@@ -10,6 +10,10 @@ import '../services/image_export_service.dart';
 import '../services/pdf_service.dart';
 import 'edit_document_pages_screen.dart';
 import '../widgets/banner_ad_widget.dart';
+
+import '../services/ocr_service.dart';
+import 'recognized_text_screen.dart';
+
 class DocumentDetailScreen extends StatefulWidget {
   final ScannedDocument document;
 
@@ -574,6 +578,45 @@ class _DocumentDetailScreenState
   // UI
   // ============================================================
 
+  Future<void> _recognizeText() async {
+    if (_exporting) return;
+
+    setState(() {
+      _exporting = true;
+    });
+
+    try {
+      final text = await OcrService.recognizeText(
+        _document.pagePaths,
+      );
+
+      if (!mounted) return;
+
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => RecognizedTextScreen(
+            recognizedText: text,
+          ),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Could not recognize text.'),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _exporting = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(
       BuildContext context,
@@ -595,9 +638,12 @@ class _DocumentDetailScreenState
         ),
         centerTitle: true,
         actions: [
+
           PopupMenuButton<String>(
             onSelected: (value) {
-              if (value == 'editPages') {
+              if (value == 'recognizeText') {
+                _recognizeText();
+              } else if (value == 'editPages') {
                 _editPages();
               } else if (value == 'rename') {
                 _renameDocument();
@@ -605,56 +651,50 @@ class _DocumentDetailScreenState
                 _deleteDocument();
               }
             },
-            itemBuilder:
-                (context) => [
-                  const PopupMenuItem<String>(
-                    value: 'editPages',
-                    child: Row(
-                      children: [
-                        Icon(Icons.edit_note_outlined),
-                        SizedBox(width: 12),
-                        Text('Edit Pages'),
-                      ],
-                    ),
-                  ),
-              PopupMenuItem(
-                value: 'rename',
+            itemBuilder: (context) => [
+              const PopupMenuItem<String>(
+                value: 'recognizeText',
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons
-                          .edit_outlined,
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Text(
-                      l10n
-                          .renameDocument,
-                    ),
+                    Icon(Icons.text_snippet_outlined),
+                    SizedBox(width: 12),
+                    Text('Recognize Text'),
                   ],
                 ),
               ),
-              PopupMenuItem(
+              const PopupMenuItem<String>(
+                value: 'editPages',
+                child: Row(
+                  children: [
+                    Icon(Icons.edit_note_outlined),
+                    SizedBox(width: 12),
+                    Text('Edit Pages'),
+                  ],
+                ),
+              ),
+              PopupMenuItem<String>(
+                value: 'rename',
+                child: Row(
+                  children: [
+                    const Icon(Icons.edit_outlined),
+                    const SizedBox(width: 12),
+                    Text(l10n.renameDocument),
+                  ],
+                ),
+              ),
+              PopupMenuItem<String>(
                 value: 'delete',
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons
-                          .delete_outline,
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Text(
-                      l10n
-                          .deleteDocument,
-                    ),
+                    const Icon(Icons.delete_outline),
+                    const SizedBox(width: 12),
+                    Text(l10n.deleteDocument),
                   ],
                 ),
               ),
             ],
           ),
+
         ],
       ),
 

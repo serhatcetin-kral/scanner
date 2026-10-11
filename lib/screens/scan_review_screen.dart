@@ -9,6 +9,10 @@ import '../l10n/app_localizations.dart';
 import '../services/document_storage_service.dart';
 import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../services/ocr_service.dart';
+import 'recognized_text_screen.dart';
+
 class ScanReviewScreen extends StatefulWidget {
   final List<String> imagePaths;
 
@@ -649,6 +653,51 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
   // UI
   // ============================================================
 
+  Future<void> _recognizeText() async {
+    if (_saving || _editing || _imagePaths.isEmpty) return;
+
+    setState(() {
+      _editing = true;
+    });
+
+    try {
+      final text = await OcrService.recognizeText(
+        List<String>.from(_imagePaths),
+      );
+
+      if (!mounted) return;
+
+      setState(() {
+        _editing = false;
+      });
+
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => RecognizedTextScreen(
+            recognizedText: text,
+          ),
+        ),
+      );
+    } catch (e) {
+      debugPrint('OCR error: $e');
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Could not recognize text.'),
+        ),
+      );
+    } finally {
+      if (mounted && _editing) {
+        setState(() {
+          _editing = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n =
@@ -907,6 +956,20 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                 const SizedBox(
                   height: 14,
                 ),
+
+
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: _saving || _editing || _imagePaths.isEmpty
+                        ? null
+                        : _recognizeText,
+                    icon: const Icon(Icons.text_snippet_outlined),
+                    label: const Text('Recognize Text'),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
 
                 // ==============================================
                 // SAVE
