@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../l10n/app_localizations.dart';
 import '../services/ocr_service.dart';
 
 class RecognizedTextScreen extends StatefulWidget {
@@ -58,7 +59,8 @@ class _RecognizedTextScreenState
     });
 
     try {
-      final text = await OcrService.recognizeFormattedText(paths);
+      final text =
+      await OcrService.recognizeFormattedText(paths);
 
       if (!mounted) return;
 
@@ -72,8 +74,10 @@ class _RecognizedTextScreenState
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not preserve text formatting.'),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.preserveFormatFailed,
+          ),
         ),
       );
     } finally {
@@ -87,15 +91,18 @@ class _RecognizedTextScreenState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     final text = _displayText;
     final hasText = text.trim().isNotEmpty;
+
     final canPreserveFormat =
         widget.imagePaths != null &&
             widget.imagePaths!.isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recognized Text'),
+        title: Text(l10n.recognizedTextTitle),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -111,7 +118,7 @@ class _RecognizedTextScreenState
                         onPressed: _loading
                             ? null
                             : () => _selectFormat(false),
-                        child: const Text('Plain Text'),
+                        child: Text(l10n.plainText),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -120,7 +127,7 @@ class _RecognizedTextScreenState
                         onPressed: _loading
                             ? null
                             : () => _selectFormat(true),
-                        child: const Text('Preserve Format'),
+                        child: Text(l10n.preserveFormat),
                       ),
                     ),
                   ],
@@ -146,9 +153,9 @@ class _RecognizedTextScreenState
                     ),
                   ),
                 )
-                    : const Center(
+                    : Center(
                   child: Text(
-                    'No text was found in this document.',
+                    l10n.noTextFound,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -167,13 +174,15 @@ class _RecognizedTextScreenState
                       if (!context.mounted) return;
 
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Text copied!'),
+                        SnackBar(
+                          content: Text(
+                            AppLocalizations.of(context)!.textCopied,
+                          ),
                         ),
                       );
                     },
                     icon: const Icon(Icons.copy_outlined),
-                    label: const Text('Copy Text'),
+                    label: Text(l10n.copyText),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -195,7 +204,7 @@ class _RecognizedTextScreenState
                       );
                     },
                     icon: const Icon(Icons.share_outlined),
-                    label: const Text('Share Text'),
+                    label: Text(l10n.shareText),
                   ),
                 ),
               ],

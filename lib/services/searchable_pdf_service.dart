@@ -101,16 +101,20 @@ class SearchablePdfService {
             pageFormat: PdfPageFormat.a4,
             margin: pw.EdgeInsets.zero,
             build: (context) {
-              return pw.Stack(
-                children: [
-                  pw.Positioned.fill(
-                    child: pw.Image(
-                      pdfImage,
-                      fit: pw.BoxFit.contain,
+              return pw.SizedBox(
+                width: pageWidth,
+                height: pageHeight,
+                child: pw.Stack(
+                  children: [
+                    pw.Positioned.fill(
+                      child: pw.Image(
+                        pdfImage,
+                        fit: pw.BoxFit.contain,
+                      ),
                     ),
-                  ),
-                  ...textWidgets,
-                ],
+                   // ...textWidgets,
+                  ],
+                ),
               );
             },
           ),

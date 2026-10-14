@@ -7,6 +7,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/scanned_document.dart';
 import '../services/document_storage_service.dart';
 
@@ -69,16 +70,16 @@ class _EditDocumentPagesScreenState
         compressQuality: 100,
         uiSettings: [
           IOSUiSettings(
-            title: 'Crop Document',
-            doneButtonTitle: 'Done',
-            cancelButtonTitle: 'Cancel',
+            title: AppLocalizations.of(context)!.cropDocument,
+            doneButtonTitle: AppLocalizations.of(context)!.done,
+            cancelButtonTitle: AppLocalizations.of(context)!.cancel,
             resetButtonHidden: false,
             rotateButtonsHidden: false,
             aspectRatioPickerButtonHidden: true,
             aspectRatioLockEnabled: false,
           ),
           AndroidUiSettings(
-            toolbarTitle: 'Crop Document',
+            toolbarTitle: AppLocalizations.of(context)!.cropDocument,
             lockAspectRatio: false,
             hideBottomControls: false,
           ),
@@ -107,7 +108,7 @@ class _EditDocumentPagesScreenState
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not crop image: $e',
+            AppLocalizations.of(context)!.cropImageFailed,
           ),
         ),
       );
@@ -205,7 +206,7 @@ class _EditDocumentPagesScreenState
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not rotate image: $e',
+            AppLocalizations.of(context)!.rotateImageFailed,
           ),
         ),
       );
@@ -236,17 +237,17 @@ class _EditDocumentPagesScreenState
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Padding(
+              Padding(
                 padding:
-                EdgeInsets.fromLTRB(
+                const EdgeInsets.fromLTRB(
                   20,
                   8,
                   20,
                   16,
                 ),
                 child: Text(
-                  'Add Page',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.addPage,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight:
                     FontWeight.bold,
@@ -259,12 +260,8 @@ class _EditDocumentPagesScreenState
                   Icons
                       .document_scanner_outlined,
                 ),
-                title: const Text(
-                  'Scan New Page',
-                ),
-                subtitle: const Text(
-                  'Use the document scanner',
-                ),
+                title: Text(AppLocalizations.of(context)!.scanNewPage),
+                subtitle: Text(AppLocalizations.of(context)!.useDocumentScanner),
                 onTap: () {
                   Navigator.pop(
                     sheetContext,
@@ -277,12 +274,8 @@ class _EditDocumentPagesScreenState
                 leading: const Icon(
                   Icons.photo_library_outlined,
                 ),
-                title: const Text(
-                  'Choose from Photos',
-                ),
-                subtitle: const Text(
-                  'Select one or more photos',
-                ),
+                title: Text(AppLocalizations.of(context)!.chooseFromPhotos),
+                subtitle: Text(AppLocalizations.of(context)!.selectOneOrMorePhotos),
                 onTap: () {
                   Navigator.pop(
                     sheetContext,
@@ -295,9 +288,7 @@ class _EditDocumentPagesScreenState
                 leading: const Icon(
                   Icons.close,
                 ),
-                title: const Text(
-                  'Cancel',
-                ),
+                title: Text(AppLocalizations.of(context)!.cancel),
                 onTap: () {
                   Navigator.pop(
                     sheetContext,
@@ -371,7 +362,7 @@ class _EditDocumentPagesScreenState
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not add scanned page: $e',
+            AppLocalizations.of(context)!.addScannedPageFailed,
           ),
         ),
       );
@@ -418,9 +409,9 @@ class _EditDocumentPagesScreenState
           compressQuality: 100,
           uiSettings: [
             IOSUiSettings(
-              title: 'Crop Document',
-              doneButtonTitle: 'Done',
-              cancelButtonTitle: 'Cancel',
+              title: AppLocalizations.of(context)!.cropDocument,
+              doneButtonTitle: AppLocalizations.of(context)!.done,
+              cancelButtonTitle: AppLocalizations.of(context)!.cancel,
               resetButtonHidden: false,
               rotateButtonsHidden: false,
               aspectRatioPickerButtonHidden:
@@ -428,7 +419,7 @@ class _EditDocumentPagesScreenState
               aspectRatioLockEnabled: false,
             ),
             AndroidUiSettings(
-              toolbarTitle: 'Crop Document',
+              toolbarTitle: AppLocalizations.of(context)!.cropDocument,
               lockAspectRatio: false,
               hideBottomControls: false,
             ),
@@ -464,7 +455,7 @@ class _EditDocumentPagesScreenState
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not add photo: $e',
+            AppLocalizations.of(context)!.addPhotoFailed,
           ),
         ),
       );
@@ -493,12 +484,8 @@ class _EditDocumentPagesScreenState
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text(
-            'Delete Page?',
-          ),
-          content: const Text(
-            'This page will be removed from the document.',
-          ),
+          title: Text(AppLocalizations.of(context)!.deletePageTitle),
+          content: Text(AppLocalizations.of(context)!.deletePageMessage),
           actions: [
             TextButton(
               onPressed: () {
@@ -507,9 +494,7 @@ class _EditDocumentPagesScreenState
                   false,
                 );
               },
-              child: const Text(
-                'Cancel',
-              ),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             FilledButton(
               onPressed: () {
@@ -518,9 +503,7 @@ class _EditDocumentPagesScreenState
                   true,
                 );
               },
-              child: const Text(
-                'Delete',
-              ),
+              child: Text(AppLocalizations.of(context)!.delete),
             ),
           ],
         );
@@ -625,7 +608,7 @@ class _EditDocumentPagesScreenState
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not save changes: $e',
+            AppLocalizations.of(context)!.saveChangesFailed,
           ),
         ),
       );
@@ -646,9 +629,7 @@ class _EditDocumentPagesScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Edit Pages',
-        ),
+        title: Text(AppLocalizations.of(context)!.editPages),
         centerTitle: true,
       ),
 
@@ -720,7 +701,7 @@ class _EditDocumentPagesScreenState
           ),
 
           Text(
-            'Page ${_currentPage + 1} / '
+            '${AppLocalizations.of(context)!.page} ${_currentPage + 1} / '
                 '${_imagePaths.length}',
             style: const TextStyle(
               fontSize: 16,
@@ -749,9 +730,7 @@ class _EditDocumentPagesScreenState
                     icon: const Icon(
                       Icons.crop,
                     ),
-                    label: const Text(
-                      'Crop',
-                    ),
+                    label: Text(AppLocalizations.of(context)!.crop),
                   ),
                 ),
 
@@ -769,9 +748,7 @@ class _EditDocumentPagesScreenState
                     icon: const Icon(
                       Icons.rotate_right,
                     ),
-                    label: const Text(
-                      'Rotate',
-                    ),
+                    label: Text(AppLocalizations.of(context)!.rotate),
                   ),
                 ),
               ],
@@ -800,9 +777,7 @@ class _EditDocumentPagesScreenState
                       Icons
                           .add_photo_alternate_outlined,
                     ),
-                    label: const Text(
-                      'Add Page',
-                    ),
+                    label: Text(AppLocalizations.of(context)!.addPage),
                   ),
                 ),
 
@@ -824,9 +799,7 @@ class _EditDocumentPagesScreenState
                     icon: const Icon(
                       Icons.swap_vert,
                     ),
-                    label: const Text(
-                      'Reorder',
-                    ),
+                    label: Text(AppLocalizations.of(context)!.reorder),
                   ),
                 ),
               ],
@@ -855,9 +828,7 @@ class _EditDocumentPagesScreenState
                 icon: const Icon(
                   Icons.delete_outline,
                 ),
-                label: const Text(
-                  'Delete Current Page',
-                ),
+                label: Text(AppLocalizations.of(context)!.deleteCurrentPage),
               ),
             ),
           ),
@@ -896,8 +867,8 @@ class _EditDocumentPagesScreenState
                 ),
                 label: Text(
                   _saving
-                      ? 'Saving...'
-                      : 'Save Changes',
+                      ? AppLocalizations.of(context)!.savingChanges
+                      : AppLocalizations.of(context)!.saveChanges,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight:
@@ -949,9 +920,7 @@ class _ReorderExistingPagesScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Reorder Pages',
-        ),
+        title: Text(AppLocalizations.of(context)!.reorderPages),
         centerTitle: true,
         actions: [
           TextButton(
@@ -961,9 +930,7 @@ class _ReorderExistingPagesScreenState
                 _pages,
               );
             },
-            child: const Text(
-              'Done',
-            ),
+            child: Text(AppLocalizations.of(context)!.done),
           ),
         ],
       ),
@@ -1024,11 +991,9 @@ class _ReorderExistingPagesScreenState
                 ),
               ),
               title: Text(
-                'Page ${index + 1}',
+                '${AppLocalizations.of(context)!.page} ${index + 1}',
               ),
-              subtitle: const Text(
-                'Drag to reorder',
-              ),
+              subtitle: Text(AppLocalizations.of(context)!.dragToReorder),
               trailing:
               ReorderableDragStartListener(
                 index: index,

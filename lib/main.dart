@@ -22,6 +22,7 @@ import 'package:flutter/services.dart';
 
 import 'widgets/banner_ad_widget.dart';
 import 'services/ad_consent_service.dart';
+import 'package:image/image.dart' as img;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -612,7 +613,19 @@ class _ScannerHomeScreenState
       if (imagePaths.isEmpty) {
         return;
       }
+      for (final path in imagePaths) {
+        final bytes = await File(path).readAsBytes();
+        final decoded = img.decodeImage(bytes);
 
+        debugPrint('SCANNED IMAGE: $path');
+        debugPrint('IMAGE SIZE: ${bytes.length} bytes');
+
+        if (decoded != null) {
+          debugPrint(
+            'IMAGE DIMENSIONS: ${decoded.width} x ${decoded.height}',
+          );
+        }
+      }
       if (!mounted) {
         return;
       }
@@ -783,6 +796,7 @@ class _ScannerHomeScreenState
   // ============================================================
 
   Widget _buildSearchBar() {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.zero,
       child: Row(
@@ -802,8 +816,7 @@ class _ScannerHomeScreenState
                 });
               },
               decoration: InputDecoration(
-                hintText:
-                'Search documents...',
+                hintText: l10n.searchDocuments,
                 prefixIcon:
                 const Icon(
                   Icons.search,
@@ -811,8 +824,7 @@ class _ScannerHomeScreenState
                 suffixIcon:
                 _searchQuery.isNotEmpty
                     ? IconButton(
-                  tooltip:
-                  'Clear search',
+                  tooltip: l10n.clearSearch,
                   icon:
                   const Icon(
                     Icons.close,
@@ -863,46 +875,40 @@ class _ScannerHomeScreenState
           const SizedBox(width: 10),
 
           PopupMenuButton<String>(
-            tooltip: 'Sort documents',
+            tooltip: l10n.sortDocuments,
             initialValue: _sortOption,
             onSelected:
             _changeSortOption,
             itemBuilder: (context) => [
-              const PopupMenuItem<String>(
+              PopupMenuItem<String>(
                 value: 'newest',
                 child: Row(
                   children: [
-                    Icon(
-                      Icons
-                          .arrow_downward_outlined,
-                    ),
-                    SizedBox(width: 12),
-                    Text('Newest first'),
+                    const Icon(Icons.arrow_downward_outlined),
+                    const SizedBox(width: 12),
+                    Text(l10n.newestFirst),
                   ],
                 ),
               ),
-              const PopupMenuItem<String>(
+
+              PopupMenuItem<String>(
                 value: 'oldest',
                 child: Row(
                   children: [
-                    Icon(
-                      Icons
-                          .arrow_upward_outlined,
-                    ),
-                    SizedBox(width: 12),
-                    Text('Oldest first'),
+                    const Icon(Icons.arrow_upward_outlined),
+                    const SizedBox(width: 12),
+                    Text(l10n.oldestFirst),
                   ],
                 ),
               ),
-              const PopupMenuItem<String>(
+
+              PopupMenuItem<String>(
                 value: 'az',
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.sort_by_alpha,
-                    ),
-                    SizedBox(width: 12),
-                    Text('A–Z'),
+                    const Icon(Icons.sort_by_alpha),
+                    const SizedBox(width: 12),
+                    Text(l10n.sortAZ),
                   ],
                 ),
               ),
@@ -996,8 +1002,7 @@ class _ScannerHomeScreenState
                 const SizedBox(height: 8),
 
                 Text(
-                  'Scan your first document or import photos '
-                      'to get started.',
+                  l10n.scanFirstDocument,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -1058,7 +1063,7 @@ class _ScannerHomeScreenState
                   height: 12,
                 ),
                 Text(
-                  'No matching documents.',
+                  l10n.noMatchingDocuments,
                   textAlign:
                   TextAlign.center,
                   style: TextStyle(
@@ -1167,7 +1172,7 @@ class _ScannerHomeScreenState
                                   .pagePaths
                                   .first,
                             ),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                             errorBuilder:
                                 (
                                 _,
@@ -1508,7 +1513,7 @@ class _ScannerHomeScreenState
           Row(
             children: [
               Text(
-                'My Documents',
+              l10n.myDocuments,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,

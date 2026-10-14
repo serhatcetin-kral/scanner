@@ -153,4 +153,199 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pngFormatDescription => 'Export pages as PNG images';
+
+  @override
+  String get myDocuments => 'My Documents';
+
+  @override
+  String get searchDocuments => 'Search documents...';
+
+  @override
+  String get clearSearch => 'Clear search';
+
+  @override
+  String get noMatchingDocuments => 'No matching documents.';
+
+  @override
+  String get sortDocuments => 'Sort documents';
+
+  @override
+  String get newestFirst => 'Newest first';
+
+  @override
+  String get oldestFirst => 'Oldest first';
+
+  @override
+  String get sortAZ => 'A–Z';
+
+  @override
+  String get scanFirstDocument => 'Scan your first document or import photos to get started.';
+
+  @override
+  String get shareApp => 'Share App';
+
+  @override
+  String get rateApp => 'Rate App';
+
+  @override
+  String get checkForUpdates => 'Check for Updates';
+
+  @override
+  String get help => 'Help';
+
+  @override
+  String get howToUse => 'How to Use';
+
+  @override
+  String get howToUseSubtitle => 'Learn how to scan, edit, save, and share';
+
+  @override
+  String get howToUseIntro => 'Scan, organize, edit, and share your documents in just a few steps.';
+
+  @override
+  String get howToScanTitle => 'Scan or Import';
+
+  @override
+  String get howToScanDescription => 'Scan a document with your camera or import one or more photos from your photo library.';
+
+  @override
+  String get howToEditTitle => 'Review & Edit';
+
+  @override
+  String get howToEditDescription => 'Crop, rotate, add, delete, or reorder pages before saving.';
+
+  @override
+  String get howToSaveTitle => 'Save Your Document';
+
+  @override
+  String get howToSaveDescription => 'Give your document a name and save it securely inside the app.';
+
+  @override
+  String get howToManageTitle => 'Manage Documents';
+
+  @override
+  String get howToManageDescription => 'Open, search, rename, edit, or delete your saved documents.';
+
+  @override
+  String get howToExportTitle => 'Share & Export';
+
+  @override
+  String get howToUseTip => 'Tip: Your saved documents stay inside Document Scanner until you choose to export, share, or delete them.';
+
+  @override
+  String get howToExportDescription => 'You can share your documents anytime in PDF, JPEG, or PNG format through other apps.';
+
+  @override
+  String get recognizeText => 'Recognize Text';
+
+  @override
+  String get editPage => 'Edit Page';
+
+  @override
+  String get editPages => 'Edit Pages';
+
+  @override
+  String get searchablePdf => 'Searchable PDF';
+
+  @override
+  String get searchablePdfDescription => 'Original scanned pages with searchable text';
+
+  @override
+  String get searchablePdfFailed => 'Could not create searchable PDF.';
+
+  @override
+  String get imageExportFailed => 'Could not export images.';
+
+  @override
+  String get recognizeTextFailed => 'Could not recognize text.';
+
+  @override
+  String get recognizedTextTitle => 'Recognized Text';
+
+  @override
+  String get plainText => 'Plain Text';
+
+  @override
+  String get preserveFormat => 'Preserve Format';
+
+  @override
+  String get preserveFormatFailed => 'Could not preserve text formatting.';
+
+  @override
+  String get noTextFound => 'No text was found in this document.';
+
+  @override
+  String get textCopied => 'Text copied!';
+
+  @override
+  String get copyText => 'Copy Text';
+
+  @override
+  String get shareText => 'Share Text';
+
+  @override
+  String get cropDocument => 'Crop Document';
+
+  @override
+  String get crop => 'Crop';
+
+  @override
+  String get rotate => 'Rotate';
+
+  @override
+  String get addPage => 'Add Page';
+
+  @override
+  String get scanNewPage => 'Scan New Page';
+
+  @override
+  String get useDocumentScanner => 'Use the document scanner';
+
+  @override
+  String get chooseFromPhotos => 'Choose from Photos';
+
+  @override
+  String get selectOneOrMorePhotos => 'Select one or more photos';
+
+  @override
+  String get reorder => 'Reorder';
+
+  @override
+  String get reorderPages => 'Reorder Pages';
+
+  @override
+  String get deleteCurrentPage => 'Delete Current Page';
+
+  @override
+  String get deletePageTitle => 'Delete Page?';
+
+  @override
+  String get deletePageMessage => 'This page will be removed from the document.';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get savingChanges => 'Saving...';
+
+  @override
+  String get dragToReorder => 'Drag to reorder';
+
+  @override
+  String get cropImageFailed => 'Could not crop image.';
+
+  @override
+  String get rotateImageFailed => 'Could not rotate image.';
+
+  @override
+  String get addScannedPageFailed => 'Could not add scanned page.';
+
+  @override
+  String get addPhotoFailed => 'Could not add photo.';
+
+  @override
+  String get saveChangesFailed => 'Could not save changes.';
+
+  @override
+  String get done => 'Done';
 }

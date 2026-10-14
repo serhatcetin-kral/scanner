@@ -233,8 +233,8 @@ class SettingsScreen extends StatelessWidget {
           // HELP
           // ====================================================
 
-          const _SectionTitle(
-            title: 'Help',
+          _SectionTitle(
+            title: l10n.help,
           ),
 
           const SizedBox(height: 10),
@@ -249,15 +249,14 @@ class SettingsScreen extends StatelessWidget {
                 colorScheme:
                 colorScheme,
               ),
-              title: const Text(
-                'How to Use',
-                style: TextStyle(
-                  fontWeight:
-                  FontWeight.w600,
+              title: Text(
+                l10n.howToUse,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              subtitle: const Text(
-                'Learn how to scan, edit, save, and share',
+              subtitle: Text(
+                l10n.howToUseSubtitle,
               ),
               trailing: const Icon(
                 Icons.chevron_right,
@@ -294,11 +293,10 @@ class SettingsScreen extends StatelessWidget {
                     colorScheme:
                     colorScheme,
                   ),
-                  title: const Text(
-                    'Share App',
-                    style: TextStyle(
-                      fontWeight:
-                      FontWeight.w600,
+                  title: Text(
+                    l10n.shareApp,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   subtitle: const Text(
@@ -322,11 +320,10 @@ class SettingsScreen extends StatelessWidget {
                     colorScheme:
                     colorScheme,
                   ),
-                  title: const Text(
-                    'Rate App',
-                    style: TextStyle(
-                      fontWeight:
-                      FontWeight.w600,
+                  title: Text(
+                    l10n.rateApp,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   subtitle: const Text(
@@ -350,11 +347,10 @@ class SettingsScreen extends StatelessWidget {
                     colorScheme:
                     colorScheme,
                   ),
-                  title: const Text(
-                    'Check for Updates',
-                    style: TextStyle(
-                      fontWeight:
-                      FontWeight.w600,
+                  title: Text(
+                    l10n.checkForUpdates,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   subtitle: const Text(

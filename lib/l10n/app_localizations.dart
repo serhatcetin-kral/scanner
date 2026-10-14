@@ -370,6 +370,396 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export pages as PNG images'**
   String get pngFormatDescription;
+
+  /// No description provided for @myDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'My Documents'**
+  String get myDocuments;
+
+  /// No description provided for @searchDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Search documents...'**
+  String get searchDocuments;
+
+  /// No description provided for @clearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get clearSearch;
+
+  /// No description provided for @noMatchingDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching documents.'**
+  String get noMatchingDocuments;
+
+  /// No description provided for @sortDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort documents'**
+  String get sortDocuments;
+
+  /// No description provided for @newestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest first'**
+  String get newestFirst;
+
+  /// No description provided for @oldestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest first'**
+  String get oldestFirst;
+
+  /// No description provided for @sortAZ.
+  ///
+  /// In en, this message translates to:
+  /// **'A–Z'**
+  String get sortAZ;
+
+  /// No description provided for @scanFirstDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan your first document or import photos to get started.'**
+  String get scanFirstDocument;
+
+  /// No description provided for @shareApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Share App'**
+  String get shareApp;
+
+  /// No description provided for @rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate App'**
+  String get rateApp;
+
+  /// No description provided for @checkForUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for Updates'**
+  String get checkForUpdates;
+
+  /// No description provided for @help.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
+  /// No description provided for @howToUse.
+  ///
+  /// In en, this message translates to:
+  /// **'How to Use'**
+  String get howToUse;
+
+  /// No description provided for @howToUseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn how to scan, edit, save, and share'**
+  String get howToUseSubtitle;
+
+  /// No description provided for @howToUseIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan, organize, edit, and share your documents in just a few steps.'**
+  String get howToUseIntro;
+
+  /// No description provided for @howToScanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan or Import'**
+  String get howToScanTitle;
+
+  /// No description provided for @howToScanDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a document with your camera or import one or more photos from your photo library.'**
+  String get howToScanDescription;
+
+  /// No description provided for @howToEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review & Edit'**
+  String get howToEditTitle;
+
+  /// No description provided for @howToEditDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop, rotate, add, delete, or reorder pages before saving.'**
+  String get howToEditDescription;
+
+  /// No description provided for @howToSaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Your Document'**
+  String get howToSaveTitle;
+
+  /// No description provided for @howToSaveDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Give your document a name and save it securely inside the app.'**
+  String get howToSaveDescription;
+
+  /// No description provided for @howToManageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Documents'**
+  String get howToManageTitle;
+
+  /// No description provided for @howToManageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Open, search, rename, edit, or delete your saved documents.'**
+  String get howToManageDescription;
+
+  /// No description provided for @howToExportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share & Export'**
+  String get howToExportTitle;
+
+  /// No description provided for @howToUseTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip: Your saved documents stay inside Document Scanner until you choose to export, share, or delete them.'**
+  String get howToUseTip;
+
+  /// No description provided for @howToExportDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can share your documents anytime in PDF, JPEG, or PNG format through other apps.'**
+  String get howToExportDescription;
+
+  /// No description provided for @recognizeText.
+  ///
+  /// In en, this message translates to:
+  /// **'Recognize Text'**
+  String get recognizeText;
+
+  /// No description provided for @editPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Page'**
+  String get editPage;
+
+  /// No description provided for @editPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Pages'**
+  String get editPages;
+
+  /// No description provided for @searchablePdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Searchable PDF'**
+  String get searchablePdf;
+
+  /// No description provided for @searchablePdfDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Original scanned pages with searchable text'**
+  String get searchablePdfDescription;
+
+  /// No description provided for @searchablePdfFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create searchable PDF.'**
+  String get searchablePdfFailed;
+
+  /// No description provided for @imageExportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not export images.'**
+  String get imageExportFailed;
+
+  /// No description provided for @recognizeTextFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not recognize text.'**
+  String get recognizeTextFailed;
+
+  /// No description provided for @recognizedTextTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recognized Text'**
+  String get recognizedTextTitle;
+
+  /// No description provided for @plainText.
+  ///
+  /// In en, this message translates to:
+  /// **'Plain Text'**
+  String get plainText;
+
+  /// No description provided for @preserveFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Preserve Format'**
+  String get preserveFormat;
+
+  /// No description provided for @preserveFormatFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not preserve text formatting.'**
+  String get preserveFormatFailed;
+
+  /// No description provided for @noTextFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No text was found in this document.'**
+  String get noTextFound;
+
+  /// No description provided for @textCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Text copied!'**
+  String get textCopied;
+
+  /// No description provided for @copyText.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Text'**
+  String get copyText;
+
+  /// No description provided for @shareText.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Text'**
+  String get shareText;
+
+  /// No description provided for @cropDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop Document'**
+  String get cropDocument;
+
+  /// No description provided for @crop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get crop;
+
+  /// No description provided for @rotate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate'**
+  String get rotate;
+
+  /// No description provided for @addPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Page'**
+  String get addPage;
+
+  /// No description provided for @scanNewPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan New Page'**
+  String get scanNewPage;
+
+  /// No description provided for @useDocumentScanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the document scanner'**
+  String get useDocumentScanner;
+
+  /// No description provided for @chooseFromPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from Photos'**
+  String get chooseFromPhotos;
+
+  /// No description provided for @selectOneOrMorePhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Select one or more photos'**
+  String get selectOneOrMorePhotos;
+
+  /// No description provided for @reorder.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder'**
+  String get reorder;
+
+  /// No description provided for @reorderPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder Pages'**
+  String get reorderPages;
+
+  /// No description provided for @deleteCurrentPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Current Page'**
+  String get deleteCurrentPage;
+
+  /// No description provided for @deletePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Page?'**
+  String get deletePageTitle;
+
+  /// No description provided for @deletePageMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This page will be removed from the document.'**
+  String get deletePageMessage;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// No description provided for @savingChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving...'**
+  String get savingChanges;
+
+  /// No description provided for @dragToReorder.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to reorder'**
+  String get dragToReorder;
+
+  /// No description provided for @cropImageFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not crop image.'**
+  String get cropImageFailed;
+
+  /// No description provided for @rotateImageFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not rotate image.'**
+  String get rotateImageFailed;
+
+  /// No description provided for @addScannedPageFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not add scanned page.'**
+  String get addScannedPageFailed;
+
+  /// No description provided for @addPhotoFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not add photo.'**
+  String get addPhotoFailed;
+
+  /// No description provided for @saveChangesFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save changes.'**
+  String get saveChangesFailed;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

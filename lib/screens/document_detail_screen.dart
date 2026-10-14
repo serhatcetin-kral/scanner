@@ -28,6 +28,7 @@ class DocumentDetailScreen extends StatefulWidget {
       _DocumentDetailScreenState();
 }
 
+
 class _DocumentDetailScreenState
     extends State<DocumentDetailScreen> {
   late ScannedDocument _document;
@@ -79,8 +80,10 @@ class _DocumentDetailScreenState
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not create searchable PDF.'),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.searchablePdfFailed,
+          ),
         ),
       );
     } finally {
@@ -168,9 +171,9 @@ class _DocumentDetailScreenState
                   leading: const CircleAvatar(
                     child: Icon(Icons.manage_search_outlined),
                   ),
-                  title: const Text('Searchable PDF'),
-                  subtitle: const Text(
-                    'Original scanned pages with searchable text',
+                  title: Text(l10n.searchablePdf),
+                  subtitle: Text(
+                    l10n.searchablePdfDescription,
                   ),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
@@ -443,9 +446,9 @@ class _DocumentDetailScreenState
 
       ScaffoldMessenger.of(context)
           .showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'Could not export images.',
+            AppLocalizations.of(context)!.imageExportFailed,
           ),
         ),
       );
@@ -678,8 +681,10 @@ class _DocumentDetailScreenState
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not recognize text.'),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.recognizeTextFailed,
+          ),
         ),
       );
     } finally {
@@ -726,23 +731,24 @@ class _DocumentDetailScreenState
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem<String>(
+              PopupMenuItem<String>(
                 value: 'recognizeText',
                 child: Row(
                   children: [
-                    Icon(Icons.text_snippet_outlined),
-                    SizedBox(width: 12),
-                    Text('Recognize Text'),
+                    const Icon(Icons.text_snippet_outlined),
+                    const SizedBox(width: 12),
+                    Text(l10n.recognizeText),
                   ],
                 ),
               ),
-              const PopupMenuItem<String>(
+
+              PopupMenuItem<String>(
                 value: 'editPages',
                 child: Row(
                   children: [
-                    Icon(Icons.edit_note_outlined),
-                    SizedBox(width: 12),
-                    Text('Edit Pages'),
+                    const Icon(Icons.edit_note_outlined),
+                    const SizedBox(width: 12),
+                    Text(l10n.editPages),
                   ],
                 ),
               ),
