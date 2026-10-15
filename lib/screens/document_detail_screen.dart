@@ -296,7 +296,7 @@ class _DocumentDetailScreenState
         _document,
       );
 
-      print(
+      debugPrint(
         'PDF CREATED: ${pdfFile.path}',
       );
 
@@ -329,7 +329,7 @@ class _DocumentDetailScreenState
         ),
       );
     } catch (e) {
-      print(
+      debugPrint(
         'PDF export/share error: $e',
       );
 
@@ -370,7 +370,7 @@ class _DocumentDetailScreenState
     });
 
     try {
-      print(
+      debugPrint(
         'REQUESTED IMAGE FORMAT: ${format.name}',
       );
 
@@ -401,11 +401,11 @@ class _DocumentDetailScreenState
       <XFile>[];
 
       for (final file in files) {
-        print(
+        debugPrint(
           'SHARING FILE: ${file.path}',
         );
 
-        print(
+        debugPrint(
           'SHARING MIME: $mimeType',
         );
 
@@ -436,7 +436,7 @@ class _DocumentDetailScreenState
         ),
       );
     } catch (e) {
-      print(
+      debugPrint(
         'IMAGE EXPORT/SHARE ERROR: $e',
       );
 
@@ -572,7 +572,7 @@ class _DocumentDetailScreenState
         _document = renamed;
       });
     } catch (e) {
-      print(
+      debugPrint(
         'Rename error: $e',
       );
     }
@@ -644,7 +644,7 @@ class _DocumentDetailScreenState
         true,
       );
     } catch (e) {
-      print(
+      debugPrint(
         'Delete error: $e',
       );
     }

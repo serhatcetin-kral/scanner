@@ -1,3 +1,5 @@
+
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -52,6 +54,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
       return;
     }
 
+    final l10n = AppLocalizations.of(context)!;
     final currentIndex = _currentPage;
     final currentPath = _imagePaths[currentIndex];
 
@@ -66,16 +69,16 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
         compressQuality: 100,
         uiSettings: [
           IOSUiSettings(
-            title: 'Crop Document',
-            doneButtonTitle: 'Done',
-            cancelButtonTitle: 'Cancel',
+            title: l10n.cropDocument,
+            doneButtonTitle: l10n.done,
+            cancelButtonTitle: l10n.cancel,
             resetButtonHidden: false,
             rotateButtonsHidden: false,
             aspectRatioPickerButtonHidden: true,
             aspectRatioLockEnabled: false,
           ),
           AndroidUiSettings(
-            toolbarTitle: 'Crop Document',
+            toolbarTitle: l10n.cropDocument,
             lockAspectRatio: false,
             hideBottomControls: false,
           ),
@@ -104,7 +107,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not crop image: $e',
+            l10n.cropImageFailed,
           ),
         ),
       );
@@ -126,6 +129,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
       return;
     }
 
+    final l10n = AppLocalizations.of(context)!;
     final currentIndex = _currentPage;
     final currentPath = _imagePaths[currentIndex];
 
@@ -203,7 +207,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not rotate image: $e',
+            l10n.rotateImageFailed,
           ),
         ),
       );
@@ -259,6 +263,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
 // ============================================================
 
   Future<void> _showAddPageOptions() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_editing || _saving) {
       return;
     }
@@ -275,16 +280,16 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
                     20,
                     8,
                     20,
                     16,
                   ),
                   child: Text(
-                    'Add Page',
-                    style: TextStyle(
+                    l10n.addPage,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -295,11 +300,9 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                   leading: const Icon(
                     Icons.document_scanner_outlined,
                   ),
-                  title: const Text(
-                    'Scan New Page',
+                  title: Text(l10n.scanNewPage,
                   ),
-                  subtitle: const Text(
-                    'Use the document scanner',
+                  subtitle: Text(l10n.useDocumentScanner,
                   ),
                   onTap: () {
                     Navigator.pop(
@@ -313,11 +316,9 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                   leading: const Icon(
                     Icons.photo_library_outlined,
                   ),
-                  title: const Text(
-                    'Choose from Photos',
+                  title: Text(l10n.chooseFromPhotos,
                   ),
-                  subtitle: const Text(
-                    'Select one or more photos',
+                  subtitle: Text(l10n.selectOneOrMorePhotos,
                   ),
                   onTap: () {
                     Navigator.pop(
@@ -331,8 +332,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                   leading: const Icon(
                     Icons.close,
                   ),
-                  title: const Text(
-                    'Cancel',
+                  title: Text(l10n.cancel,
                   ),
                   onTap: () {
                     Navigator.pop(
@@ -411,7 +411,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not add scanned page: $e',
+            AppLocalizations.of(context)!.addScannedPageFailed,
           ),
         ),
       );
@@ -429,6 +429,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
 // ============================================================
 
   Future<void> _addPagesFromGallery() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_editing) {
       return;
     }
@@ -454,16 +455,16 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
           compressQuality: 100,
           uiSettings: [
             IOSUiSettings(
-              title: 'Crop Document',
-              doneButtonTitle: 'Done',
-              cancelButtonTitle: 'Cancel',
+              title: l10n.cropDocument,
+              doneButtonTitle: l10n.done,
+              cancelButtonTitle: l10n.cancel,
               resetButtonHidden: false,
               rotateButtonsHidden: false,
               aspectRatioPickerButtonHidden: true,
               aspectRatioLockEnabled: false,
             ),
             AndroidUiSettings(
-              toolbarTitle: 'Crop Document',
+              toolbarTitle: l10n.cropDocument,
               lockAspectRatio: false,
               hideBottomControls: false,
             ),
@@ -502,7 +503,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Could not add photo: $e',
+            AppLocalizations.of(context)!.addPhotoFailed,
           ),
         ),
       );
@@ -686,8 +687,8 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not recognize text.'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.recognizeTextFailed),
         ),
       );
     } finally {
@@ -867,8 +868,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                           Icons.crop,
                         ),
                         label:
-                        const Text(
-                          'Crop',
+                        Text(l10n.crop,
                         ),
                       ),
                     ),
@@ -891,8 +891,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                               .rotate_right,
                         ),
                         label:
-                        const Text(
-                          'Rotate',
+                        Text(l10n.rotate,
                         ),
                       ),
                     ),
@@ -919,8 +918,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                         icon: const Icon(
                           Icons.add_photo_alternate_outlined,
                         ),
-                        label: const Text(
-                          'Add Page',
+                        label: Text(l10n.addPage,
                         ),
                       ),
                     ),
@@ -946,8 +944,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                               .swap_vert,
                         ),
                         label:
-                        const Text(
-                          'Reorder',
+                        Text(l10n.reorder,
                         ),
                       ),
                     ),
@@ -966,7 +963,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
                         ? null
                         : _recognizeText,
                     icon: const Icon(Icons.text_snippet_outlined),
-                    label: const Text('Recognize Text'),
+                    label: Text(l10n.recognizeText),
                   ),
                 ),
 
@@ -1056,9 +1053,6 @@ class _ReorderPagesScreenState
       int newIndex,
       ) {
     setState(() {
-      if (newIndex > oldIndex) {
-        newIndex--;
-      }
 
       final page =
       _pages.removeAt(
@@ -1074,10 +1068,10 @@ class _ReorderPagesScreenState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Reorder Pages',
+        title: Text(l10n.reorderPages,
           style: TextStyle(
             fontWeight:
             FontWeight.bold,
@@ -1092,8 +1086,7 @@ class _ReorderPagesScreenState
                 _pages,
               );
             },
-            child: const Text(
-              'Done',
+            child: Text(l10n.done,
             ),
           ),
         ],
@@ -1105,7 +1098,7 @@ class _ReorderPagesScreenState
         ),
         itemCount:
         _pages.length,
-        onReorder:
+        onReorderItem:
         _reorder,
         itemBuilder:
             (context, index) {
@@ -1145,7 +1138,7 @@ class _ReorderPagesScreenState
                 ),
               ),
               title: Text(
-                'Page ${index + 1}',
+                '${l10n.page} ${index + 1}',
                 style:
                 const TextStyle(
                   fontWeight:
@@ -1154,8 +1147,7 @@ class _ReorderPagesScreenState
                 ),
               ),
               subtitle:
-              const Text(
-                'Drag to reorder',
+              Text(l10n.dragToReorder,
               ),
               trailing:
               ReorderableDragStartListener(

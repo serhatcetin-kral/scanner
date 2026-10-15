@@ -1,5 +1,7 @@
+
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
@@ -15,8 +17,7 @@ class ImageExportService {
     required ScannedDocument document,
     required ImageExportFormat format,
   }) async {
-    final tempDirectory =
-    await getTemporaryDirectory();
+    final tempDirectory = await getTemporaryDirectory();
 
     final exportDirectory = Directory(
       '${tempDirectory.path}/image_exports/${document.id}',
@@ -40,31 +41,25 @@ class ImageExportService {
 
     final exportedFiles = <File>[];
 
-    for (
-    int i = 0;
-    i < document.pagePaths.length;
-    i++
-    ) {
+    for (int i = 0; i < document.pagePaths.length; i++) {
       final sourceFile = File(
         document.pagePaths[i],
       );
 
       if (!await sourceFile.exists()) {
-        print(
+        debugPrint(
           '[ImageExportService] '
               'Source file missing: ${sourceFile.path}',
         );
         continue;
       }
 
-      final sourceBytes =
-      await sourceFile.readAsBytes();
+      final sourceBytes = await sourceFile.readAsBytes();
 
-      final decodedImage =
-      img.decodeImage(sourceBytes);
+      final decodedImage = img.decodeImage(sourceBytes);
 
       if (decodedImage == null) {
-        print(
+        debugPrint(
           '[ImageExportService] '
               'Could not decode: ${sourceFile.path}',
         );
@@ -74,10 +69,7 @@ class ImageExportService {
       final pageNumber = i + 1;
 
       switch (format) {
-      // --------------------------------------------------
       // JPEG
-      // --------------------------------------------------
-
         case ImageExportFormat.jpeg:
           final jpegBytes = img.encodeJpg(
             decodedImage,
@@ -94,27 +86,21 @@ class ImageExportService {
             flush: true,
           );
 
-          print(
+          debugPrint(
             '[ImageExportService] '
                 'JPEG CREATED: ${jpegFile.path}',
           );
 
-          print(
+          debugPrint(
             '[ImageExportService] '
                 'JPEG SIZE: '
                 '${await jpegFile.length()} bytes',
           );
 
-          exportedFiles.add(
-            jpegFile,
-          );
-
+          exportedFiles.add(jpegFile);
           break;
 
-      // --------------------------------------------------
       // PNG
-      // --------------------------------------------------
-
         case ImageExportFormat.png:
           final pngBytes = img.encodePng(
             decodedImage,
@@ -131,21 +117,18 @@ class ImageExportService {
             flush: true,
           );
 
-          print(
+          debugPrint(
             '[ImageExportService] '
                 'PNG CREATED: ${pngFile.path}',
           );
 
-          print(
+          debugPrint(
             '[ImageExportService] '
                 'PNG SIZE: '
                 '${await pngFile.length()} bytes',
           );
 
-          exportedFiles.add(
-            pngFile,
-          );
-
+          exportedFiles.add(pngFile);
           break;
       }
     }
@@ -159,12 +142,8 @@ class ImageExportService {
     return exportedFiles;
   }
 
-  static String _safeFileName(
-      String name,
-      ) {
-    var safeName = name
-        .trim()
-        .replaceAll(
+  static String _safeFileName(String name) {
+    var safeName = name.trim().replaceAll(
       RegExp(r'[\\/:*?"<>|]'),
       '_',
     );

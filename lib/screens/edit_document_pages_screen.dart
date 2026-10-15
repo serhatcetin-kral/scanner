@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -384,6 +385,8 @@ class _EditDocumentPagesScreenState
       return;
     }
 
+    final l10n = AppLocalizations.of(context)!;
+
     setState(() {
       _editing = true;
     });
@@ -409,9 +412,9 @@ class _EditDocumentPagesScreenState
           compressQuality: 100,
           uiSettings: [
             IOSUiSettings(
-              title: AppLocalizations.of(context)!.cropDocument,
-              doneButtonTitle: AppLocalizations.of(context)!.done,
-              cancelButtonTitle: AppLocalizations.of(context)!.cancel,
+              title: l10n.cropDocument,
+              doneButtonTitle: l10n.done,
+              cancelButtonTitle: l10n.cancel,
               resetButtonHidden: false,
               rotateButtonsHidden: false,
               aspectRatioPickerButtonHidden:
@@ -419,7 +422,7 @@ class _EditDocumentPagesScreenState
               aspectRatioLockEnabled: false,
             ),
             AndroidUiSettings(
-              toolbarTitle: AppLocalizations.of(context)!.cropDocument,
+              toolbarTitle: l10n.cropDocument,
               lockAspectRatio: false,
               hideBottomControls: false,
             ),
@@ -941,15 +944,11 @@ class _ReorderExistingPagesScreenState
           16,
         ),
         itemCount: _pages.length,
-        onReorder: (
+        onReorderItem: (
             oldIndex,
             newIndex,
             ) {
           setState(() {
-            if (newIndex > oldIndex) {
-              newIndex -= 1;
-            }
-
             final page =
             _pages.removeAt(
               oldIndex,
