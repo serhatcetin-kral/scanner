@@ -131,10 +131,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get pdfCreateFailed => 'PDF oluşturulamadı';
 
   @override
-  String get exportDocument => 'Belgeyi Paylas';
+  String get exportDocument => 'Belgeyi Dışa Aktar';
 
   @override
-  String get chooseExportFormat => 'Paylasma Formatını Seçin';
+  String get chooseExportFormat => 'Dışa Aktarma Biçimini Seçin';
 
   @override
   String get pdfFormat => 'PDF';
@@ -146,13 +146,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get jpegFormat => 'JPEG';
 
   @override
-  String get jpegFormatDescription => 'Sayfaları JPEG görselleri olarak paylasin';
+  String get jpegFormatDescription => 'Sayfaları JPEG görselleri olarak dışa aktar';
 
   @override
   String get pngFormat => 'PNG';
 
   @override
-  String get pngFormatDescription => 'Sayfaları PNG görselleri olarak paylasin';
+  String get pngFormatDescription => 'Sayfaları PNG görselleri olarak dışa aktar';
 
   @override
   String get myDocuments => 'Belgelerim';
@@ -227,13 +227,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get howToManageDescription => 'Kaydedilen belgelerinizi açın, arayın, yeniden adlandırın, düzenleyin veya silin.';
 
   @override
-  String get howToExportTitle => 'Paylaş';
+  String get howToExportTitle => 'Paylaş ve Dışa Aktar';
 
   @override
   String get howToUseTip => 'İpucu: Kaydettiğiniz belgeler, siz dışa aktarana, paylaşana veya silene kadar Document Scanner uygulamasında kalır.';
 
   @override
-  String get howToExportDescription => 'Belgelerinizi istediğiniz zaman PDF, JPEG veya PNG formatinda diğer uygulamalar araciligiyla paylaşabilirsiniz.';
+  String get howToExportDescription => 'Belgelerinizi istediğiniz zaman PDF, JPEG veya PNG biçiminde diğer uygulamalar aracılığıyla paylaşabilirsiniz.';
 
   @override
   String get recognizeText => 'Metni Tanı';
@@ -254,7 +254,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get searchablePdfFailed => 'Aranabilir PDF oluşturulamadı.';
 
   @override
-  String get imageExportFailed => 'Görseller paylasilamadi.';
+  String get imageExportFailed => 'Görseller dışa aktarılamadı.';
 
   @override
   String get recognizeTextFailed => 'Metin tanınamadı.';
@@ -347,5 +347,5 @@ class AppLocalizationsTr extends AppLocalizations {
   String get saveChangesFailed => 'Değişiklikler kaydedilemedi.';
 
   @override
-  String get done => 'Tamamlandi';
+  String get done => 'Tamamlandı';
 }

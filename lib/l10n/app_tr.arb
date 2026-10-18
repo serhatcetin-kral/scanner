@@ -1,3 +1,4 @@
+
 {
   "@@locale": "tr",
 
@@ -41,13 +42,15 @@
   "creatingPdf": "PDF oluşturuluyor...",
   "pdfCreated": "PDF başarıyla oluşturuldu",
   "pdfCreateFailed": "PDF oluşturulamadı",
-  "exportDocument": "Belgeyi Paylas",
-  "chooseExportFormat": "Paylasma Formatını Seçin",
+  "exportDocument": "Belgeyi Dışa Aktar",
+  "chooseExportFormat": "Dışa Aktarma Biçimini Seçin",
   "pdfFormat": "PDF",
   "pdfFormatDescription": "Tüm sayfaları tek bir PDF dosyasında birleştir",
   "jpegFormat": "JPEG",
-  "jpegFormatDescription": "Sayfaları JPEG görselleri olarak paylasin",
+  "jpegFormatDescription": "Sayfaları JPEG görselleri olarak dışa aktar",
   "pngFormat": "PNG",
+  "pngFormatDescription": "Sayfaları PNG görselleri olarak dışa aktar",
+
   "myDocuments": "Belgelerim",
   "searchDocuments": "Belgelerde ara...",
   "clearSearch": "Aramayı temizle",
@@ -57,7 +60,7 @@
   "oldestFirst": "Önce en eskiler",
   "sortAZ": "A–Z",
   "scanFirstDocument": "Başlamak için ilk belgenizi tarayın veya galeriden fotoğraf ekleyin.",
-  "pngFormatDescription": "Sayfaları PNG görselleri olarak paylasin",
+
   "shareApp": "Uygulamayı Paylaş",
   "rateApp": "Uygulamayı Değerlendir",
   "checkForUpdates": "Güncellemeleri Kontrol Et",
@@ -73,8 +76,8 @@
   "howToSaveDescription": "Belgenize bir ad verin ve uygulama içinde güvenle kaydedin.",
   "howToManageTitle": "Belgeleri Yönet",
   "howToManageDescription": "Kaydedilen belgelerinizi açın, arayın, yeniden adlandırın, düzenleyin veya silin.",
-  "howToExportTitle": "Paylaş",
-  "howToExportDescription": "Belgelerinizi istediğiniz zaman PDF, JPEG veya PNG formatinda diğer uygulamalar araciligiyla paylaşabilirsiniz.",
+  "howToExportTitle": "Paylaş ve Dışa Aktar",
+  "howToExportDescription": "Belgelerinizi istediğiniz zaman PDF, JPEG veya PNG biçiminde diğer uygulamalar aracılığıyla paylaşabilirsiniz.",
   "howToUseTip": "İpucu: Kaydettiğiniz belgeler, siz dışa aktarana, paylaşana veya silene kadar Document Scanner uygulamasında kalır.",
 
   "recognizeText": "Metni Tanı",
@@ -83,7 +86,7 @@
   "searchablePdf": "Aranabilir PDF",
   "searchablePdfDescription": "Metin içinde arama yapılabilen orijinal taranmış sayfalar",
   "searchablePdfFailed": "Aranabilir PDF oluşturulamadı.",
-  "imageExportFailed": "Görseller paylasilamadi.",
+  "imageExportFailed": "Görseller dışa aktarılamadı.",
   "recognizeTextFailed": "Metin tanınamadı.",
   "recognizedTextTitle": "Tanınan Metin",
   "plainText": "Düz Metin",
@@ -114,5 +117,5 @@
   "addScannedPageFailed": "Taranan sayfa eklenemedi.",
   "addPhotoFailed": "Fotoğraf eklenemedi.",
   "saveChangesFailed": "Değişiklikler kaydedilemedi.",
-  "done": "Tamamlandi"
+  "done": "Tamamlandı"
 }

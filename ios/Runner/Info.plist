@@ -6,6 +6,8 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSUserTrackingUsageDescription</key>
+    <string>We use your device identifier, with your permission, to provide personalized advertisements and measure ad performance.</string>
 	<key>CFBundleDisplayName</key>
 	<string>Document Scanner</string>
 	<key>CFBundleExecutable</key>
@@ -24,8 +26,14 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6282915034498194~6929020716</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Document Scanner needs camera access to scan documents.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Document Scanner needs photo access to import documents from your photo library.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -66,13 +74,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-    <string>Document Scanner needs camera access to scan documents.</string>
-
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Document Scanner needs photo access to import documents from your photo library.</string>
-    <!-- Google AdMob App ID -->
-    <key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-6282915034498194~6929020716</string>
 </dict>
 </plist>

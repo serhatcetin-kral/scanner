@@ -9,6 +9,7 @@ import 'how_to_use_screen.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../services/ad_consent_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../models/app_language.dart';
 class SettingsScreen extends StatelessWidget {
   final Locale currentLocale;
   final Future<void> Function(Locale locale)
@@ -131,6 +132,54 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  Future<void> _showLanguageDialog(
+      BuildContext context,
+      ) async {
+    final selectedLanguage =
+    await showDialog<AppLanguage>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text(
+            AppLocalizations.of(dialogContext)!.selectLanguage,
+          ),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: AppLanguage.all.length,
+              itemBuilder: (context, index) {
+                final language = AppLanguage.all[index];
+
+                final isSelected =
+                    AppLanguage.codeFromLocale(currentLocale) ==
+                        language.code;
+
+                return ListTile(
+                  leading: Text(
+                    language.flag,
+                    style: const TextStyle(fontSize: 26),
+                  ),
+                  title: Text(language.name),
+                  trailing: isSelected
+                      ? const Icon(Icons.check_circle)
+                      : null,
+                  onTap: () {
+                    Navigator.pop(dialogContext, language);
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+
+    if (selectedLanguage != null) {
+      await onLanguageChanged(selectedLanguage.locale);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n =
@@ -177,54 +226,31 @@ class SettingsScreen extends StatelessWidget {
           Card(
             clipBehavior:
             Clip.antiAlias,
-            child: RadioGroup<String>(
-              groupValue:
-              currentLocale.languageCode,
-              onChanged: (value) async {
-                if (value == null) {
-                  return;
-                }
-
-                await onLanguageChanged(
-                  Locale(value),
-                );
-              },
-              child: Column(
-                children: [
-                  RadioListTile<String>(
-                    value: 'en',
-                    title: Text(
-                      l10n.english,
-                    ),
-                    secondary:
-                    const Text(
-                      '🇺🇸',
-                      style: TextStyle(
-                        fontSize: 26,
-                      ),
-                    ),
-                  ),
-
-                  const Divider(
-                    height: 1,
-                  ),
-
-                  RadioListTile<String>(
-                    value: 'tr',
-                    title: Text(
-                      l10n.turkish,
-                    ),
-                    secondary:
-                    const Text(
-                      '🇹🇷',
-                      style: TextStyle(
-                        fontSize: 26,
-                      ),
-                    ),
-                  ),
-                ],
+            child:
+            Card(
+              clipBehavior: Clip.antiAlias,
+              child: ListTile(
+                leading: _SettingsIcon(
+                  icon: Icons.language,
+                  colorScheme: colorScheme,
+                ),
+                title: Text(l10n.language),
+                subtitle: Text(
+                  AppLanguage.all
+                      .where(
+                        (language) =>
+                    language.code ==
+                        AppLanguage.codeFromLocale(currentLocale),
+                  )
+                      .map((language) => language.name)
+                      .firstOrNull ??
+                      currentLocale.languageCode,
+                ),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => _showLanguageDialog(context),
               ),
             ),
+
           ),
 
           const SizedBox(height: 28),

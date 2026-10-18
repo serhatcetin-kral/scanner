@@ -40,6 +40,9 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   }
 
   Future<void> _checkConsentAndLoadBanner() async {
+    if (!AdConsentService.privacyFlowCompleted) {
+      return;
+    }
     if (!Platform.isIOS && !Platform.isAndroid) {
       return;
     }

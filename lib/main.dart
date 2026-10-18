@@ -23,10 +23,12 @@ import 'package:flutter/services.dart';
 import 'widgets/banner_ad_widget.dart';
 import 'services/ad_consent_service.dart';
 import 'package:image/image.dart' as img;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await AdConsentService.initialize();
+  //await AdConsentService.requestTrackingPermission();
+  //await AdConsentService.initialize();
 
   // 📱 Keep the app in portrait mode only
   await SystemChrome.setPreferredOrientations([
@@ -73,6 +75,30 @@ class _DocumentScannerAppState
   const Locale('en');
 
   late bool _languageSelected;
+  bool _privacyFlowStarted = false;
+
+
+  Future<void> _startPrivacyFlow() async {
+    if (_privacyFlowStarted) return;
+    _privacyFlowStarted = true;
+
+    try {
+      // 1. Google UMP consent.
+      await AdConsentService.initialize();
+
+      // 2. Apple ATT permission.
+      await AdConsentService.requestTrackingPermission();
+
+      // 3. Initialize Google Mobile Ads only after ATT.
+      await AdConsentService.initializeMobileAds();
+    } catch (e) {
+      debugPrint('Privacy initialization error: $e');
+    } finally {
+      // 4. Notify banner widgets.
+      AdConsentService.privacyFlowCompleted = true;
+      AdConsentService.consentChanges.value++;
+    }
+  }
 
   @override
   void initState() {
@@ -82,8 +108,14 @@ class _DocumentScannerAppState
         widget.savedLanguage != null;
 
     if (widget.savedLanguage != null) {
+      final languageParts =
+      widget.savedLanguage!.split('_');
+
       _locale = Locale(
-        widget.savedLanguage!,
+        languageParts[0],
+        languageParts.length > 1
+            ? languageParts[1]
+            : null,
       );
     }
   }
@@ -114,7 +146,7 @@ class _DocumentScannerAppState
 
     await prefs.setString(
       'selected_language',
-      locale.languageCode,
+      locale.toString(),
     );
 
     if (!mounted) {
@@ -124,6 +156,12 @@ class _DocumentScannerAppState
     setState(() {
       _locale = locale;
       _languageSelected = true;
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _startPrivacyFlow();
+      }
     });
   }
 
@@ -140,7 +178,7 @@ class _DocumentScannerAppState
 
     await prefs.setString(
       'selected_language',
-      locale.languageCode,
+      locale.toString(),
     );
 
     if (!mounted) {

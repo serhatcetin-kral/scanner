@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
-
+import '../models/app_language.dart';
 class LanguageSelectionScreen extends StatefulWidget {
   final Locale currentLocale;
   final void Function(Locale locale) onLanguageChanged;
@@ -19,32 +20,49 @@ class LanguageSelectionScreen extends StatefulWidget {
       _LanguageSelectionScreenState();
 }
 
+ const List<AppLanguage> _languages =
+    AppLanguage.all;
+
 class _LanguageSelectionScreenState
     extends State<LanguageSelectionScreen> {
   late String _selectedLanguage;
   bool _saving = false;
 
+
+
   @override
   void initState() {
     super.initState();
+    _selectedLanguage = _localeCode(widget.currentLocale);
+  }
 
-    _selectedLanguage =
-        widget.currentLocale.languageCode;
+  String _localeCode(Locale locale) {
+    if (locale.countryCode == null ||
+        locale.countryCode!.isEmpty) {
+      return locale.languageCode;
+    }
+
+    return '${locale.languageCode}_${locale.countryCode}';
+  }
+
+  Locale _localeFromCode(String code) {
+    final parts = code.split('_');
+
+    if (parts.length == 2) {
+      return Locale(parts[0], parts[1]);
+    }
+
+    return Locale(code);
   }
 
   void _selectLanguage(String code) {
-    if (_selectedLanguage == code) {
-      return;
-    }
+    if (_selectedLanguage == code || _saving) return;
 
     setState(() {
       _selectedLanguage = code;
     });
 
-    // Immediately updates MaterialApp locale.
-    widget.onLanguageChanged(
-      Locale(code),
-    );
+    widget.onLanguageChanged(_localeFromCode(code));
   }
 
   Future<void> _continue() async {
@@ -54,53 +72,53 @@ class _LanguageSelectionScreenState
       _saving = true;
     });
 
-    await widget.onContinue(
-      Locale(_selectedLanguage),
-    );
-
-    if (!mounted) return;
-
-    setState(() {
-      _saving = false;
-    });
+    try {
+      await widget.onContinue(
+        _localeFromCode(_selectedLanguage),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _saving = false;
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
           child: Column(
             children: [
-              const Spacer(),
+              const SizedBox(height: 12),
 
               Container(
-                width: 110,
-                height: 110,
+                width: 86,
+                height: 86,
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primaryContainer,
-                  borderRadius: BorderRadius.circular(30),
+                  color: colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(26),
                 ),
                 child: Icon(
                   Icons.document_scanner_outlined,
-                  size: 60,
-                  color:
-                  Theme.of(context).colorScheme.primary,
+                  size: 48,
+                  color: colorScheme.primary,
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
               Text(
                 l10n.selectLanguage,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 28,
+                  fontSize: 27,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -111,41 +129,42 @@ class _LanguageSelectionScreenState
                 l10n.selectLanguageSubtitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey.shade600,
+                  fontSize: 15,
+                  color: colorScheme.onSurfaceVariant,
                 ),
               ),
 
-              const SizedBox(height: 35),
+              const SizedBox(height: 20),
 
-              _languageCard(
-                code: 'en',
-                flag: '🇺🇸',
-                title: l10n.english,
+              Expanded(
+                child: ListView.separated(
+                  itemCount: _languages.length,
+                  separatorBuilder: (_, _) =>
+                  const SizedBox(height: 10),
+                  itemBuilder: (context, index) {
+                    final language = _languages[index];
+
+                    return _languageCard(
+                      code: language.code,
+                      flag: language.flag,
+                      title: language.name,
+                    );
+                  },
+                ),
               ),
 
-              const SizedBox(height: 14),
-
-              _languageCard(
-                code: 'tr',
-                flag: '🇹🇷',
-                title: l10n.turkish,
-              ),
-
-              const Spacer(),
+              const SizedBox(height: 16),
 
               SizedBox(
                 width: double.infinity,
                 height: 56,
                 child: FilledButton(
-                  onPressed:
-                  _saving ? null : _continue,
+                  onPressed: _saving ? null : _continue,
                   child: _saving
                       ? const SizedBox(
                     width: 22,
                     height: 22,
-                    child:
-                    CircularProgressIndicator(
+                    child: CircularProgressIndicator(
                       strokeWidth: 2,
                     ),
                   )
@@ -158,8 +177,6 @@ class _LanguageSelectionScreenState
                   ),
                 ),
               ),
-
-              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -172,43 +189,34 @@ class _LanguageSelectionScreenState
     required String flag,
     required String title,
   }) {
-    final selected =
-        _selectedLanguage == code;
+    final selected = _selectedLanguage == code;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return InkWell(
       borderRadius: BorderRadius.circular(18),
-      onTap: () {
-        _selectLanguage(code);
-      },
+      onTap: () => _selectLanguage(code),
       child: AnimatedContainer(
-        duration: const Duration(
-          milliseconds: 200,
-        ),
-        padding: const EdgeInsets.all(18),
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
             color: selected
-                ? Theme.of(context)
-                .colorScheme
-                .primary
-                : Colors.grey.shade300,
+                ? colorScheme.primary
+                : colorScheme.outlineVariant,
             width: selected ? 2 : 1,
           ),
           color: selected
-              ? Theme.of(context)
-              .colorScheme
-              .primaryContainer
-              .withValues(alpha: 0.35)
+              ? colorScheme.primaryContainer.withValues(
+            alpha: 0.35,
+          )
               : null,
         ),
         child: Row(
           children: [
             Text(
               flag,
-              style: const TextStyle(
-                fontSize: 30,
-              ),
+              style: const TextStyle(fontSize: 28),
             ),
 
             const SizedBox(width: 16),
@@ -217,7 +225,7 @@ class _LanguageSelectionScreenState
               child: Text(
                 title,
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -226,9 +234,7 @@ class _LanguageSelectionScreenState
             if (selected)
               Icon(
                 Icons.check_circle,
-                color: Theme.of(context)
-                    .colorScheme
-                    .primary,
+                color: colorScheme.primary,
               ),
           ],
         ),
