@@ -23,7 +23,8 @@ import 'package:flutter/services.dart';
 import 'widgets/banner_ad_widget.dart';
 import 'services/ad_consent_service.dart';
 import 'package:image/image.dart' as img;
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:flutter/foundation.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -81,7 +82,13 @@ class _DocumentScannerAppState
   Future<void> _startPrivacyFlow() async {
     if (_privacyFlowStarted) return;
     _privacyFlowStarted = true;
-
+    if (kDebugMode) {
+      await MobileAds.instance.updateRequestConfiguration(
+        RequestConfiguration(
+          testDeviceIds: ['d05a50709c59c284e116cf64c2db72fd'],
+        ),
+      );
+    }
     try {
       // 1. Google UMP consent.
       await AdConsentService.initialize();
