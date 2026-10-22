@@ -26,9 +26,12 @@ dependencies:
   upgrader: ^13.5.0
   image_picker: ^1.2.3
   image_cropper: ^12.2.1
-  google_mobile_ads: ^9.1.0
+  google_mobile_ads:
+    path: third_party/google_mobile_ads
   google_mlkit_text_recognition: ^0.17.1
   app_tracking_transparency: ^2.0.7
+  package_info_plus: ^10.2.2
+  url_launcher: ^6.3.3
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:upgrader/upgrader.dart';
@@ -33,6 +36,16 @@ class SettingsScreen extends StatelessWidget {
             'scan, organize, and export documents easily.',
       ),
     );
+  }
+
+  Future<void> _contactSupport(BuildContext context) async {
+    final uri = Uri(scheme: 'mailto', path: 'serhatamerica.sc@gmail.com');
+    if (!await launchUrl(uri)) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No email app is available.')),
+      );
+    }
   }
 
   // ============================================================
@@ -390,6 +403,31 @@ class SettingsScreen extends StatelessWidget {
                       context,
                     );
                   },
+                ),
+                const Divider(height: 1, indent: 72),
+                ListTile(
+                  leading: _SettingsIcon(
+                    icon: Icons.email_outlined,
+                    colorScheme: colorScheme,
+                  ),
+                  title: const Text('serhat06.sc@gmail.com'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => _contactSupport(context),
+                ),
+                const Divider(height: 1, indent: 72),
+                ListTile(
+                  leading: _SettingsIcon(
+                    icon: Icons.info_outline,
+                    colorScheme: colorScheme,
+                  ),
+                  title: const Text('Version'),
+                  trailing: FutureBuilder<PackageInfo>(
+                    future: PackageInfo.fromPlatform(),
+                    builder: (context, snapshot) => Text(
+                      snapshot.data?.version ?? '',
+                      style: TextStyle(color: colorScheme.onSurfaceVariant),
+                    ),
+                  ),
                 ),
               ],
             ),

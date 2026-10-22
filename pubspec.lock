@@ -280,10 +280,9 @@ packages:
   google_mobile_ads:
     dependency: "direct main"
     description:
-      name: google_mobile_ads
-      sha256: "8094e1ace8b0da33fe79027ca6959763c96a28855025cb7c8ec60838e1d56ed8"
-      url: "https://pub.dev"
-    source: hosted
+      path: "third_party/google_mobile_ads"
+      relative: true
+    source: path
     version: "9.1.0"
   hooks:
     dependency: transitive
@@ -566,7 +565,7 @@ packages:
     source: hosted
     version: "3.0.0"
   package_info_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: package_info_plus
       sha256: "73ef2cd5c11a7548f9b7f6fc2a4f6113de2e64aa2a70de63feede95548822908"
@@ -851,7 +850,7 @@ packages:
     source: hosted
     version: "13.7.0"
   url_launcher:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: url_launcher
       sha256: e8cc955c97e06df9879140a1fe301f3d493f01b7c62dec7f46834be31d7e9fda
