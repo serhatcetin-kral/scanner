@@ -639,25 +639,41 @@ class _ScannerHomeScreenState
   // We are not changing its behavior.
   // ============================================================
 
-  Future<void>
-  _scanDocument() async {
+
+  Future<void> _scanDocument() async {
     try {
       final result =
-      await FlutterDocScanner()
-          .getScanDocuments();
+      await FlutterDocScanner().getScanDocuments();
 
       if (result == null) {
         return;
       }
 
-      final imagePaths =
-      List<String>.from(
-        result,
-      );
+      debugPrint('SCANNER RESULT: $result');
+
+      List<String> imagePaths = [];
+
+      if (result is List) {
+        // Handle a list of image paths.
+        imagePaths = result.map((e) => e.toString()).toList();
+      } else if (result is Map) {
+        // Handle Android scanner response.
+        final images = result['images'];
+
+        if (images is List) {
+          imagePaths = images
+              .map((e) => e.toString())
+              .toList();
+        } else if (images is String) {
+          imagePaths = [images];
+        }
+      }
 
       if (imagePaths.isEmpty) {
+        debugPrint('No scanned images found.');
         return;
       }
+
       for (final path in imagePaths) {
         final bytes = await File(path).readAsBytes();
         final decoded = img.decodeImage(bytes);
@@ -671,43 +687,39 @@ class _ScannerHomeScreenState
           );
         }
       }
+
       if (!mounted) {
         return;
       }
 
-      final saved =
-      await Navigator.push<bool>(
+      final saved = await Navigator.push<bool>(
         context,
         MaterialPageRoute(
-          builder: (_) =>
-              ScanReviewScreen(
-                imagePaths: imagePaths,
-              ),
+          builder: (_) => ScanReviewScreen(
+            imagePaths: imagePaths,
+          ),
         ),
       );
 
       if (saved == true) {
         await _loadDocuments();
       }
-    } catch (e) {
-      debugPrint(
-        'Scanner error: $e',
-      );
+    } catch (e, stackTrace) {
+      debugPrint('Scanner error: $e');
+      debugPrintStack(stackTrace: stackTrace);
 
       if (!mounted) {
         return;
       }
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            'Scanner error: $e',
-          ),
+          content: Text('Scanner error: $e'),
         ),
       );
     }
   }
+
 
   // ============================================================
   // IMPORT FROM PHOTOS
