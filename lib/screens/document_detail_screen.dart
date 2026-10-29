@@ -479,6 +479,15 @@ class _DocumentDetailScreenState
       return;
     }
 
+// Remove cached images so edited pages reload from disk.
+    for (final path in updatedDocument.pagePaths) {
+      await FileImage(File(path)).evict();
+    }
+
+    if (!mounted) {
+      return;
+    }
+
     setState(() {
       _document = updatedDocument;
       _currentPage = 0;

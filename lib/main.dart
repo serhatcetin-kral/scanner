@@ -640,42 +640,46 @@ class _ScannerHomeScreenState
   // ============================================================
 
 
+
   Future<void> _scanDocument() async {
     try {
-      final result =
-      await FlutterDocScanner().getScanDocuments();
+      final result = await FlutterDocScanner()
+          .getScannedDocumentAsImages();
 
       if (result == null) {
+        debugPrint('Scanner cancelled.');
         return;
       }
 
       debugPrint('SCANNER RESULT: $result');
 
-      List<String> imagePaths = [];
+      // Convert the returned image URIs into local file paths.
+      final List<String> imagePaths = result.images
+          .map<String>((uri) {
+        final value = uri.toString();
 
-      if (result is List) {
-        // Handle a list of image paths.
-        imagePaths = result.map((e) => e.toString()).toList();
-      } else if (result is Map) {
-        // Handle Android scanner response.
-        final images = result['images'];
-
-        if (images is List) {
-          imagePaths = images
-              .map((e) => e.toString())
-              .toList();
-        } else if (images is String) {
-          imagePaths = [images];
+        if (value.startsWith('file://')) {
+          return Uri.parse(value).toFilePath();
         }
-      }
+
+        return value;
+      })
+          .toList();
 
       if (imagePaths.isEmpty) {
         debugPrint('No scanned images found.');
         return;
       }
 
+      // Verify scanned images.
       for (final path in imagePaths) {
-        final bytes = await File(path).readAsBytes();
+        final file = File(path);
+
+        if (!await file.exists()) {
+          throw Exception('Scanned image not found: $path');
+        }
+
+        final bytes = await file.readAsBytes();
         final decoded = img.decodeImage(bytes);
 
         debugPrint('SCANNED IMAGE: $path');
@@ -683,7 +687,8 @@ class _ScannerHomeScreenState
 
         if (decoded != null) {
           debugPrint(
-            'IMAGE DIMENSIONS: ${decoded.width} x ${decoded.height}',
+            'IMAGE DIMENSIONS: '
+                '${decoded.width} x ${decoded.height}',
           );
         }
       }
@@ -692,6 +697,7 @@ class _ScannerHomeScreenState
         return;
       }
 
+      // Open review screen.
       final saved = await Navigator.push<bool>(
         context,
         MaterialPageRoute(
@@ -701,6 +707,7 @@ class _ScannerHomeScreenState
         ),
       );
 
+      // Refresh documents after saving.
       if (saved == true) {
         await _loadDocuments();
       }
@@ -719,6 +726,7 @@ class _ScannerHomeScreenState
       );
     }
   }
+
 
 
   // ============================================================
@@ -767,12 +775,10 @@ class _ScannerHomeScreenState
               false,
             ),
             AndroidUiSettings(
-              toolbarTitle:
-              'Crop Document',
-              lockAspectRatio:
-              false,
-              hideBottomControls:
-              false,
+              toolbarTitle: 'Crop & Rotate Document',
+              lockAspectRatio: false,
+              hideBottomControls: false,
+              showCropGrid: true,
             ),
           ],
         );

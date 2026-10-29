@@ -81,6 +81,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
             toolbarTitle: l10n.cropDocument,
             lockAspectRatio: false,
             hideBottomControls: false,
+            showCropGrid: true,
           ),
         ],
       );
@@ -467,6 +468,7 @@ class _ScanReviewScreenState extends State<ScanReviewScreen> {
               toolbarTitle: l10n.cropDocument,
               lockAspectRatio: false,
               hideBottomControls: false,
+              showCropGrid: true,
             ),
           ],
         );

@@ -425,6 +425,7 @@ class _EditDocumentPagesScreenState
               toolbarTitle: l10n.cropDocument,
               lockAspectRatio: false,
               hideBottomControls: false,
+              showCropGrid: true,
             ),
           ],
         );
